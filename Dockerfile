@@ -2,9 +2,8 @@ FROM node:25-alpine AS frontend
 WORKDIR /app
 RUN apk add --no-cache git
 RUN git clone https://github.com/andrewbrdk/queryagent /app
-RUN npm install typescript
-RUN npx tsc
-RUN cp index.html style.css dist/
+RUN npm install
+RUN npm run build
 
 FROM golang:1.26 AS backend
 RUN apt-get update && apt-get install -y --no-install-recommends pgformatter \
